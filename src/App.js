@@ -11,8 +11,15 @@ function App() {
     const [history, setHistory] = useState(getHistory());
 
     function getHistory(){
+
         const hist = Object.entries({... localStorage});
-        return hist.map(el => {
+        return hist.sort((a, b) => {
+            a = parseInt(a[0].split(" ").join(""))
+            b = parseInt(a[0].split(" ").join(""))
+            if(a < b){return -1;}
+            if(a > b){return 1;}
+            return 0;
+        }).map(el => {
             const data = JSON.parse(el[1]);
             return {
                 date : el[0],
